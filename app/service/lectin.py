@@ -12,7 +12,7 @@ class LectinService:
   data: dict[str, pd.DataFrame]
   
   def __init__(self,):
-    self.data = pd.read_excel(os.path.join(DATA_DIR, "galectins_id_cleaned.xlsx"), sheet_name=None) # todo: dynamic
+    self.data = pd.read_excel(os.path.join(DATA_DIR, "galectins_id_cleaned_new.xlsx"), sheet_name=None) # todo: dynamic
   
   def get_lectin_info(self, id: str) -> Optional[dict]:
     '''Return available glycan info'''
