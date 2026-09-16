@@ -1,9 +1,8 @@
-# main.py
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-# Change this line so it safely finds the router folder
-from api.router import router  
+from app.api.router import router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
