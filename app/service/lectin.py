@@ -14,12 +14,13 @@ class LectinService:
   def __init__(self,):
     self.data = pd.read_excel(os.path.join(DATA_DIR, "galectins_id_cleaned.xlsx"), sheet_name=None) # todo: dynamic
   
-  def get_lectin_info(self, id: str) -> Optional[dict]:
+def get_lectin_info(self, id: str) -> Optional[dict]:
     '''Return available glycan info'''
     res = self.data.get(id, None)
     if res is None or res.empty: return None
     kd_col_name = res.columns[2]
-    unit = kd_col_name.split(',')[1].strip()
+    parts = kd_col_name.split(',')
+    unit = parts[1].strip() if len(parts) > 1 else ""
     res = res.rename(columns={
       kd_col_name: "Kd",
       "stdev_Kd": "kderr",
