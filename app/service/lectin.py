@@ -1,18 +1,18 @@
 # service/lectin.py
+import os
 import pandas as pd
 from typing import Optional
 from sqlalchemy.orm import Session
 from app.model.glycan import Glycan, Pairs, PairData
 # TODO: use db instead of direct xlsx
 
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+
 class LectinService:
   data: dict[str, pd.DataFrame]
   
   def __init__(self,):
-    # self.data = pd.read_excel("app/data/galectins_id_cleaned.xlsx", sheet_name=None) # todo: dynamic
-    self.data = pd.read_excel("app/data/Galectins_GlyTouCanID_Updated.xlsx", sheet_name=None) # todo: dynamic
-    new_data = pd.read_excel('app/data/GAL4_Data_GlyTouCanID.xlsx', sheet_name=None)
-    self.data.update(new_data)
+    self.data = pd.read_excel(os.path.join(DATA_DIR, "galectins_id_cleaned.xlsx"), sheet_name=None) # todo: dynamic
   
   def get_lectin_info(self, id: str) -> Optional[dict]:
     '''Return available glycan info'''
@@ -83,9 +83,3 @@ class LectinService:
           unit=unit
           
         )
-    
-    
-    
-    
-    
-    
